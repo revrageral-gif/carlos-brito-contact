@@ -1,1 +1,204 @@
 
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101113">
+  <title>As Nossas Instalações | Brinox Metal Solutions</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #101113;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    header {
+      text-align: center;
+      padding: 65px 20px 45px;
+    }
+
+    .brand {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #b5b5b5;
+    }
+
+    h1 {
+      font-size: clamp(30px, 6vw, 52px);
+      font-weight: 500;
+      margin: 20px 0;
+    }
+
+    .intro {
+      max-width: 520px;
+      margin: auto;
+      color: #b5b5b5;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .gallery {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 70px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .gallery img {
+      display: block;
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.015);
+    }
+
+    @media (max-width: 650px) {
+      header {
+        padding: 50px 20px 35px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .gallery img {
+        height: auto;
+      }
+    }
+
+    dialog {
+      background: #101113;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 12px;
+      max-width: 96vw;
+      max-height: 96vh;
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.92);
+    }
+
+    dialog img {
+      display: block;
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+    }
+
+    .close {
+      display: block;
+      margin: 0 0 12px auto;
+      background: #292d32;
+      color: #ffffff;
+      border: none;
+      border-radius: 7px;
+      padding: 11px 18px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      color: #888888;
+      padding: 25px 20px 45px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="brand">Brinox Metal Solutions</div>
+
+    <h1>As Nossas Instalações</h1>
+
+    <p class="intro">
+      Conheça o espaço onde a precisão,
+      a experiência e a dedicação ganham forma.
+    </p>
+  </header>
+
+  <main class="gallery" id="gallery"></main>
+
+  <dialog id="viewer">
+    <button class="close" id="closeButton">
+      Fechar ✕
+    </button>
+    <img id="largePhoto" alt="Instalações da Brinox">
+  </dialog>
+
+  <footer>
+    © Brinox Metal Solutions
+  </footer>
+
+  <script>
+    const photos = [
+      "IMG_3196.JPG",
+      "IMG_3203.JPG",
+      "IMG_3208.JPG",
+      "IMG_3210.JPG",
+      "IMG_3214.JPG",
+      "IMG_3216.JPG",
+      "IMG_3219.JPG",
+      "IMG_3222.JPG",
+      "IMG_3225.JPG",
+      "IMG_3236.JPG",
+      "IMG_3237.JPG",
+      "IMG_3253.JPG",
+      "IMG_3254.JPG",
+      "IMG_3257.JPG",
+      "IMG_3258.JPG",
+      "IMG_3259.JPG"
+    ];
+
+    const gallery = document.getElementById("gallery");
+    const viewer = document.getElementById("viewer");
+    const largePhoto = document.getElementById("largePhoto");
+    const closeButton = document.getElementById("closeButton");
+
+    photos.forEach((photo, index) => {
+      const img = document.createElement("img");
+
+      img.src = encodeURIComponent(photo);
+      img.alt = "Instalações Brinox - Fotografia " + (index + 1);
+      img.loading = index < 2 ? "eager" : "lazy";
+
+      img.addEventListener("click", () => {
+        largePhoto.src = img.src;
+        viewer.showModal();
+      });
+
+      gallery.appendChild(img);
+    });
+
+    closeButton.addEventListener("click", () => {
+      viewer.close();
+    });
+
+    viewer.addEventListener("click", (event) => {
+      if (event.target === viewer) {
+        viewer.close();
+      }
+    });
+  </script>
+
+</body>
+</html>
