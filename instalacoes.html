@@ -5,11 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101113">
+
   <title>As Nossas Instalações | Brinox Metal Solutions</title>
 
   <style>
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: auto;
     }
 
     body {
@@ -61,11 +66,6 @@
       object-fit: cover;
       border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.25s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.015);
     }
 
     @media (max-width: 650px) {
@@ -142,6 +142,7 @@
     <button class="close" id="closeButton">
       Fechar ✕
     </button>
+
     <img id="largePhoto" alt="Instalações da Brinox">
   </dialog>
 
@@ -179,7 +180,10 @@
 
       img.src = encodeURIComponent(photo);
       img.alt = "Instalações Brinox - Fotografia " + (index + 1);
-      img.loading = index < 2 ? "eager" : "lazy";
+
+      // Carregar todas as fotografias imediatamente
+      img.loading = "eager";
+      img.decoding = "async";
 
       img.addEventListener("click", () => {
         largePhoto.src = img.src;
